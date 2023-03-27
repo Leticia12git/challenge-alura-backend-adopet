@@ -2,15 +2,17 @@ package com.alura.adopet.Adopet.controller;
 
 import com.alura.adopet.Adopet.model.Tutor;
 import com.alura.adopet.Adopet.service.TutorService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/tutores")
+@AllArgsConstructor
 public class TutorController {
 
     @Autowired
@@ -18,28 +20,28 @@ public class TutorController {
 
     @GetMapping
     public ResponseEntity<List<Tutor>> findAll(){
-        tutorService.findAll();
-        return ResponseEntity.of(HttpStatus.OK);
+        List<Tutor> list = tutorService.findAll();
+        return ResponseEntity.ok().body(list);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Tutor> findById(@PathVariable Long id){
-        tutorService.findById(id);
-        return ResponseEntity.ok().body(id);
+    public Optional<Tutor> findById(@PathVariable Long id){
+        return tutorService.findById(id);
     }
 
     @PostMapping(value = "/tutores")
-    public ResponseEntity<Tutor> create(@RequestBody Tutor tutor){
-        return tutorService.save(tutor);
+    public Tutor create(@RequestBody Tutor tutor){
+        return tutorService.create(tutor);
     }
 
     @PutMapping
-    public ResponseEntity<Tutor> update@PathVariable Long id,@RequestBody Tutor tutor){
-        return tutorService.update(tutor);
+    public Tutor update(@PathVariable Long id , @RequestBody Tutor tutor) {
+       return tutorService.update(id, tutor);
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id){
-        tutorService.deleteById(id);
+    public void delete(@PathVariable Long id) {
+        tutorService.delete(id);
+
     }
 }
