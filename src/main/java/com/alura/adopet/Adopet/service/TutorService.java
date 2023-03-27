@@ -2,6 +2,7 @@ package com.alura.adopet.Adopet.service;
 
 import com.alura.adopet.Adopet.model.Tutor;
 import com.alura.adopet.Adopet.repository.TutorRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
+@AllArgsConstructor
 @Service
 public class TutorService {
 
@@ -41,7 +43,7 @@ public class TutorService {
      * @return
      */
 
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional()
     public Tutor create( Tutor tutor) {
         return tutorRepository.save(tutor);
     }
@@ -53,7 +55,7 @@ public class TutorService {
      * @return
      */
     public Tutor update(Long id, Tutor tutor) {
-        Tutor entity = tutorRepository.getReferenceById(id);
+        Tutor entity = tutorRepository.findById(id).get();
         updateData(entity, tutor);
         return tutorRepository.save(entity);
     }
@@ -61,6 +63,7 @@ public class TutorService {
     private void updateData(Tutor entity, Tutor tutor) {
         entity.setNome(tutor.getNome());
         entity.setEmail(tutor.getEmail());
+        entity.setSenha(tutor.getSenha());
     }
 
     /**

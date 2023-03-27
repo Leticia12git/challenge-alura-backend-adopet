@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = "/tutores")
+@RequestMapping(value = "/tutor")
 @AllArgsConstructor
 public class TutorController {
 
@@ -34,9 +34,10 @@ public class TutorController {
         return tutorService.create(tutor);
     }
 
-    @PutMapping
-    public Tutor update(@PathVariable Long id , @RequestBody Tutor tutor) {
-       return tutorService.update(id, tutor);
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Tutor> update(@PathVariable Long id , @RequestBody Tutor tutor) {
+        tutor = tutorService.update(id, tutor);
+       return ResponseEntity.ok().body(tutor);
     }
 
     @DeleteMapping(value = "/{id}")
