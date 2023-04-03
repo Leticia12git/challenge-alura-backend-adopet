@@ -1,8 +1,8 @@
 package com.alura.adopet.Adopet.controller;
 
 import com.alura.adopet.Adopet.exception.ValidationException;
-import com.alura.adopet.Adopet.model.Tutor;
-import com.alura.adopet.Adopet.service.TutorService;
+import com.alura.adopet.Adopet.model.Abrigo;
+import com.alura.adopet.Adopet.service.AbrigoService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,12 +16,12 @@ import java.util.Optional;
  */
 
 @RestController
-@RequestMapping(value = "/tutor")
+@RequestMapping(value = "/abrigos")
 @AllArgsConstructor
-public class TutorController {
+public class AbrigoController {
 
     @Autowired
-    private TutorService tutorService;
+    private AbrigoService abrigoService;
 
     /**
      * Endpoint para buscar todos os tutores
@@ -29,8 +29,8 @@ public class TutorController {
      * @return List Tutor
      */
     @GetMapping
-    public ResponseEntity<List<Tutor>> findAll() {
-        List<Tutor> list = tutorService.findAll();
+    public ResponseEntity<List<Abrigo>> findAll() {
+        List<Abrigo> list = abrigoService.findAll();
         return ResponseEntity.ok().body(list);
     }
 
@@ -42,44 +42,44 @@ public class TutorController {
      */
 
     @GetMapping(value = "/{id}")
-    public Optional<Tutor> findById(@PathVariable Long id) {
-        return tutorService.findById(id);
+    public Optional<Abrigo> findById(@PathVariable Long id) {
+        return abrigoService.findById(id);
     }
 
     /**
      * Endpoint para cadastrar um tutor
      *
-     * @param tutor
-     * @return Tutor
+     * @param abrigo
+     * @return Abrigo
      */
     @PostMapping(value = "/tutores")
-    public ResponseEntity<Tutor> create(@RequestBody Tutor tutor) throws ValidationException {
-        tutorService.create(tutor);
-        return ResponseEntity.ok().body(tutor);
+    public ResponseEntity<Abrigo> create(@RequestBody Abrigo abrigo) throws ValidationException {
+        abrigoService.create(abrigo);
+        return ResponseEntity.ok().body(abrigo);
     }
 
     /**
-     * Endpoint para atualizar um tutor
+     * Endpoint para atualizar um abrigo
      *
      * @param id
-     * @param tutor
-     * @return Tutor
+     * @param abrigo
+     * @return Abrigo
      */
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Tutor> update(@PathVariable Long id, @RequestBody Tutor tutor) {
-        tutor = tutorService.update(id, tutor);
-        return ResponseEntity.ok().body(tutor);
+    public ResponseEntity<Abrigo> update(@PathVariable Long id, @RequestBody Abrigo abrigo) {
+        abrigo = abrigoService.update(id, abrigo);
+        return ResponseEntity.ok().body(abrigo);
     }
 
     /**
-     * Endpoint para deletar um Tutor
+     * Endpoint para deletar um Abrigo
      *
      * @param id
      */
 
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable Long id) {
-        tutorService.delete(id);
+        abrigoService.delete(id);
 
     }
 }

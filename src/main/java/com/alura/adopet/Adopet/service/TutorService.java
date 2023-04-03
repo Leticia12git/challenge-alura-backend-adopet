@@ -1,5 +1,6 @@
 package com.alura.adopet.Adopet.service;
 
+import com.alura.adopet.Adopet.exception.ValidationException;
 import com.alura.adopet.Adopet.model.Tutor;
 import com.alura.adopet.Adopet.repository.TutorRepository;
 import lombok.AllArgsConstructor;
@@ -44,8 +45,9 @@ public class TutorService {
      */
 
     @Transactional()
-    public Tutor create( Tutor tutor) {
+    public Tutor create( Tutor tutor) throws ValidationException {
         return tutorRepository.save(tutor);
+
     }
 
     /**

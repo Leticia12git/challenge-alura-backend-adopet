@@ -1,8 +1,8 @@
 package com.alura.adopet.Adopet.controller;
 
 import com.alura.adopet.Adopet.exception.ValidationException;
-import com.alura.adopet.Adopet.model.Tutor;
-import com.alura.adopet.Adopet.service.TutorService;
+import com.alura.adopet.Adopet.model.Pet;
+import com.alura.adopet.Adopet.service.PetService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,10 +18,10 @@ import java.util.Optional;
 @RestController
 @RequestMapping(value = "/tutor")
 @AllArgsConstructor
-public class TutorController {
+public class PetController {
 
     @Autowired
-    private TutorService tutorService;
+    private PetService petService;
 
     /**
      * Endpoint para buscar todos os tutores
@@ -29,8 +29,8 @@ public class TutorController {
      * @return List Tutor
      */
     @GetMapping
-    public ResponseEntity<List<Tutor>> findAll() {
-        List<Tutor> list = tutorService.findAll();
+    public ResponseEntity<List<Pet>> findAll() {
+        List<Pet> list = petService.findAll();
         return ResponseEntity.ok().body(list);
     }
 
@@ -42,44 +42,44 @@ public class TutorController {
      */
 
     @GetMapping(value = "/{id}")
-    public Optional<Tutor> findById(@PathVariable Long id) {
-        return tutorService.findById(id);
+    public Optional<Pet> findById(@PathVariable Long id) {
+        return petService.findById(id);
     }
 
     /**
      * Endpoint para cadastrar um tutor
      *
-     * @param tutor
-     * @return Tutor
+     * @param pet
+     * @return Abrigo
      */
     @PostMapping(value = "/tutores")
-    public ResponseEntity<Tutor> create(@RequestBody Tutor tutor) throws ValidationException {
-        tutorService.create(tutor);
-        return ResponseEntity.ok().body(tutor);
+    public ResponseEntity<Pet> create(@RequestBody Pet pet) throws ValidationException {
+        petService.create(pet);
+        return ResponseEntity.ok().body(pet);
     }
 
     /**
      * Endpoint para atualizar um tutor
      *
      * @param id
-     * @param tutor
-     * @return Tutor
+     * @param pet
+     * @return Pet
      */
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Tutor> update(@PathVariable Long id, @RequestBody Tutor tutor) {
-        tutor = tutorService.update(id, tutor);
-        return ResponseEntity.ok().body(tutor);
+    public ResponseEntity<Pet> update(@PathVariable Long id, @RequestBody Pet pet) {
+        pet = petService.update(id, pet);
+        return ResponseEntity.ok().body(pet);
     }
 
     /**
-     * Endpoint para deletar um Tutor
+     * Endpoint para deletar um Pet
      *
      * @param id
      */
 
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable Long id) {
-        tutorService.delete(id);
+        petService.delete(id);
 
     }
 }
