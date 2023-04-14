@@ -12,3 +12,9 @@
 * JUnit
 * Hibernate 
 
+# Configuracões de instalações 
+* Maven
+* Git
+* Postman
+
+
