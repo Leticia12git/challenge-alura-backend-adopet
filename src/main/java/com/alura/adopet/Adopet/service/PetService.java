@@ -6,6 +6,8 @@ import com.alura.adopet.Adopet.model.Tutor;
 import com.alura.adopet.Adopet.repository.PetRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,8 +26,8 @@ public class PetService {
      *
      * @return List<Abrigo>
      */
-    public List<Pet> findAll() {
-        return petRepository.findAll();
+    public Page<Pet> findAll(Pageable pageable) {
+        return petRepository.findAll(pageable);
     }
 
     /**

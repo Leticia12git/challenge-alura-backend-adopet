@@ -5,6 +5,8 @@ import com.alura.adopet.Adopet.model.Pet;
 import com.alura.adopet.Adopet.service.PetService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,15 +25,16 @@ public class PetController {
     @Autowired
     private PetService petService;
 
+
     /**
      * Endpoint para buscar todos os tutores
      *
      * @return List Tutor
      */
     @GetMapping
-    public ResponseEntity<List<Pet>> findAll() {
-        List<Pet> list = petService.findAll();
-        return ResponseEntity.ok().body(list);
+    public ResponseEntity<Page<Pet>> findAll(Pageable pageable) {
+        return ResponseEntity.ok(petService.findAll(pageable)) ;
+
     }
 
     /**
