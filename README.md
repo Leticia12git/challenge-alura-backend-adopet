@@ -13,6 +13,8 @@
 * Hibernate 
 
 # Configuracões de instalações 
+* IntelliJ IDEA
+* Java JDK 17
 * Maven
 * Git
 * Postman
